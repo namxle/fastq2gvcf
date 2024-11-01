@@ -9,7 +9,7 @@ process PREPROCESS {
 
     output:
     tuple val(meta), path(fastq_R1), path(fastq_R2), emit: fastq
-    path(fasta_data)
+    path(fasta_data), emit: fasta
 
     script:
     def sample_name = meta.name

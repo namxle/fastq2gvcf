@@ -5,7 +5,7 @@ process ALIGNMENT_SORTING {
 
     input:
     tuple val(meta), path(fastq_R1), path(fastq_R2)
-    tuple path(fasta), path(fasta_index)
+    path(fasta_data)
 
     output:
     tuple val(meta), path(sorted_bam)
@@ -14,6 +14,7 @@ process ALIGNMENT_SORTING {
     def sample_name = meta.name
     def bwa_bam     = "bwa.bam"
     def ali_bam     = "ali.bam"
+    def fasta       = "ref.fa"
 
     sorted_bam      = "sorted.bam"
 
