@@ -1,6 +1,6 @@
 process FASTQ_SINGLE_TO_PAIR_READS {
-    tag "$meta.id-$meta.type"
-    label 'process_single'
+    tag "$meta.id"
+    label 'process_high_medium'
     label 'publish_outdir'
 
     input:
