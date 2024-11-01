@@ -11,15 +11,12 @@
       "fa_icon": "fas fa-terminal",
       "description": "Define where the pipeline should find vcf sample and save output data.",
       "required": [
-        "outdir",
+        "fastq",
+        "fasta",
         "sample_id",
-        "user_id",
-        "prefix",
-        "docker_registry",
-        "fastq_files",
-        "remove_duplication",
         "sample_name",
-        "sample_type"
+        "outdir",
+        "docker_registry"
       ],
       "properties": {
         "fasta": {
