@@ -39,8 +39,8 @@ ch_fastq = Channel.fromPath(params.fastq)
 */
 
 
-include { FASTQ_SINGLE_TO_PAIR_READS    } from '../modules/fastq_single_to_pair_reads'
-include { ALIGNMENT_SORTING             } from '../modules/alignment_sorting'
+include { PREPROCESS        } from '../modules/preprocess'
+include { ALIGNMENT_SORTING } from '../modules/alignment_sorting'
 
 
 //
@@ -77,13 +77,14 @@ include { ALIGNMENT_SORTING             } from '../modules/alignment_sorting'
 workflow ANALYZE {
     ch_input = create_input_channel(ch_fastq)
 
-    FASTQ_SINGLE_TO_PAIR_READS(
-        ch_input
+    PREPROCESS(
+        ch_input,
+        ch_fasta
     )
 
     ALIGNMENT_SORTING(
-        FASTQ_SINGLE_TO_PAIR_READS.out.fastq,
-        ch_fasta
+        PREPROCESS.out.fastq,
+        PREPROCESS.out.fasta
     )
 }
 

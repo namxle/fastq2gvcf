@@ -5,7 +5,7 @@ process ALIGNMENT_SORTING {
 
     input:
     tuple val(meta), path(fastq_R1), path(fastq_R2)
-    path(fasta)
+    tuple path(fasta), path(fasta_index)
 
     output:
     tuple val(meta), path(sorted_bam)
