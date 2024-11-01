@@ -4,7 +4,6 @@
 
 ```bash
 nextflow run main.nf \
--c nextflow.config \
 -profile docker \
 --fastq /data/GL/nextflow/namxle/samples/SRR2098616.fastq.gz \
 --fasta /data/GL/nextflow/namxle/samples/SRR2098616.fasta.gz \
