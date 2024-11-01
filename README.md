@@ -3,5 +3,5 @@
 ### Run
 
 ```bash
-nextflow run main.nf -c nextflow.conf
+nextflow run main.nf
 ```
