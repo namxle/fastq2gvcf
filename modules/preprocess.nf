@@ -27,7 +27,7 @@ process PREPROCESS {
     seqtk seq -1 ${fastq} | bgzip -@ ${task.cpus} > ${fastq_R2}
 
     # Preprocess fasta file
-    gzip -d --fast ${fasta} > ${fasta_raw}
+    gzip -cd --fast ${fasta} > ${fasta_raw}
     bgzip -@ ${task.cpus} -c ${fasta_raw} > ${fasta_bgzip}
     samtools faidx ${fasta_bgzip}
     """
