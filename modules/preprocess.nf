@@ -9,14 +9,13 @@ process PREPROCESS {
 
     output:
     tuple val(meta), path(fastq_R1), path(fastq_R2), emit: fastq
-    tuple path(fasta_bgzip), path(fasta_index), emit: fasta
+    path(fasta_data)
 
     script:
     def sample_name = meta.name
 
-    fasta_raw   = "fasta.raw"
-    fasta_bgzip = "fasta.bgz"
-    fasta_index = "${fasta_bgzip}.fai"
+    fasta_raw   = "ref.fa"
+    fasta_data  = "${fasta_raw}*"
 
     fastq_R1 = "${sample_name}_R1.fastq.gz"
     fastq_R2 = "${sample_name}_R2.fastq.gz"
@@ -28,8 +27,7 @@ process PREPROCESS {
 
     # Preprocess fasta file
     gzip -cd --fast ${fasta} > ${fasta_raw}
-    bgzip -@ ${task.cpus} -c ${fasta_raw} > ${fasta_bgzip}
-    samtools faidx ${fasta_bgzip}
+    bwa index ${fasta_raw}
     """
     
 }
