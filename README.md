@@ -16,5 +16,7 @@ nextflow run main.nf \
 ### Docker
 
 ```bash
-docker build -t namxle/gatk:4.6.1.0 .
+docker build -t namxle/gatk:4.6.1.0 -f docker/gatk.docker .
+
+docker build -t namxle/ubuntu-samtools:22.04-1.9 -f docker/ubuntu-samtools.docker .
 ```
