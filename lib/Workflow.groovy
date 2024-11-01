@@ -4,7 +4,7 @@
 
 import nextflow.Nextflow
 
-class WorkflowMain {
+class Workflow {
 
     //
     // Citation string for pipeline
@@ -74,13 +74,10 @@ class WorkflowMain {
             Utils.checkCondaChannels(log)
         }
 
-        // Check AWS batch settings
-        NfcoreTemplate.awsBatch(workflow, params)
-
         // Check vcf has been provided
-        if (!params.vcf) {
-            Nextflow.error("Please provide an vcf sample to the pipeline e.g. '--vcf sample.vcf'")
-        }
+        // if (!params.vcf) {
+        //     Nextflow.error("Please provide an vcf sample to the pipeline e.g. '--vcf sample.vcf'")
+        // }
     }
     //
     // Get attribute from genome config file e.g. fasta
