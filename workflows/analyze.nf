@@ -82,7 +82,8 @@ workflow ANALYZE {
     )
 
     ALIGNMENT_SORTING(
-        FASTQ_SINGLE_TO_PAIR_READS.out.fastq
+        FASTQ_SINGLE_TO_PAIR_READS.out.fastq,
+        ch_fasta
     )
 }
 
