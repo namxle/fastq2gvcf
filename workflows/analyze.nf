@@ -74,7 +74,7 @@ include { FASTQ_SINGLE_TO_PAIR_READS } from '../modules/fastq_single_to_pair_rea
 
 
 workflow ANALYZE {
-    ch_input = create_input_channel()
+    ch_input = create_input_channel(ch_fastq)
 
     FASTQ_SINGLE_TO_PAIR_READS(
         ch_input
