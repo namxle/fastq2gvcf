@@ -1,6 +1,6 @@
 process FASTQ_SINGLE_TO_PAIR_READS {
     tag "$meta.id"
-    label 'process_high_medium'
+    label 'process_fixed_medium_cpu'
     label 'publish_outdir'
 
     input:
