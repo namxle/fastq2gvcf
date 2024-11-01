@@ -20,8 +20,8 @@ process ALIGNMENT_SORTING {
     """
     # Align
     bwa mem \
-    -M \
     -t ${task.cpus} \
+    -M \
     ${fasta} \
     ${fastq_R1} \
     ${fastq_R2} | \
