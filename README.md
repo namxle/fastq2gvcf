@@ -12,3 +12,9 @@ nextflow run main.nf \
 --outdir /data/GL/nextflow/namxle/results \
 --docker_registry namxle
 ```
+
+### Docker
+
+```bash
+docker build -t namxle/gatk:4.6.1.0 .
+```
