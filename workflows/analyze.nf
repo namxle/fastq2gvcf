@@ -29,8 +29,8 @@ for (param in checkPathParamList) {
     } 
 }
 
-ch_fasta = file(params.fasta)
-ch_fastq = file(params.fastq)
+ch_fasta = Channel.fromPath(params.fasta)
+ch_fastq = Channel.fromPath(params.fastq)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
