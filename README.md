@@ -26,6 +26,6 @@ docker build -t namxle/ubuntu-samtools:22.04-1.9 -f docker/ubuntu-samtools.docke
 ```bash
 docker run -itv /data/GL/nextflow/namxle/samples:/workspace/samples namxle/ubuntu-samtools:22.04-1.9 bash
 
-seqtk seq -1 samples/SRR2098616.fastq.gz | bgzip > SRR2098616_R1.fastq.gz
-seqtk seq -2 samples/SRR2098616.fastq.gz | bgzip > SRR2098616_R2.fastq.gz
+seqtk seq -1 samples/SRR2098616.fastq.gz | bgzip -@ 10  > SRR2098616_R1.fastq.gz
+seqtk seq -2 samples/SRR2098616.fastq.gz | bgzip -@ 10 > SRR2098616_R2.fastq.gz
 ```
