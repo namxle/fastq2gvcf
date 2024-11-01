@@ -18,6 +18,8 @@ make
 ENV PATH="$PATH:/usr/bin/samtools-1.9"
 
 # Install seqtk
+RUN apt-get install -y git
+
 RUN git clone https://github.com/lh3/seqtk.git && \
     cd seqtk && \
     make
