@@ -11,17 +11,27 @@ process VARIANT_CALLING {
     tuple val(meta), path(vcf), emit: vcf
 
     script:
-    def fasta   = meta.fasta
-    def id      = meta.id
+    def id          = meta.id
+    def fasta       = meta.fasta
+    def deduped_bam = "${id}.deduped.bam"
 
-    vcf         = "${id}.vcf.gz"
+    vcf             = "${id}.vcf.gz"
 
     """
-    gatk --java-options "-Xmx4g" HaplotypeCaller  \
+    # Mark duplicate 
+    gatk MarkDuplicatesSpark \
+      -I ${bam} \
+      -O ${deduped_bam} \
+      --remove-all-duplicates true \
+    samtools index ${deduped_bam}
+
+    # Variant Haplotype Caller
+    gatk --java-options "-Xmx16g" HaplotypeCaller  \
     -R ${fasta} \
-    -I ${bam} \
+    -I ${deduped_bam} \
     -O ${vcf} \
     --sample-name ${id} \
+    -nct ${task.cpus} \
     -ERC GVCF
     """
 }
