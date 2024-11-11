@@ -4,7 +4,7 @@ process VARIANT_CALLING {
     label 'publish_outdir'
 
     input:
-    tuple val(meta), path(bam)
+    tuple val(meta), path(bam), path(bam_bai)
     path(fasta_dir)
 
     output:
@@ -21,6 +21,7 @@ process VARIANT_CALLING {
     -R ${fasta} \
     -I ${bam} \
     -O ${vcf} \
+    --sample-name ${id} \
     -ERC GVCF
     """
 }
