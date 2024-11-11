@@ -22,7 +22,9 @@ process VARIANT_CALLING {
     gatk MarkDuplicatesSpark \
       -I ${bam} \
       -O ${deduped_bam} \
-      --remove-all-duplicates true \
+      --remove-all-duplicates true
+      
+    # Index deduped bam
     samtools index ${deduped_bam}
 
     # Variant Haplotype Caller
@@ -31,7 +33,6 @@ process VARIANT_CALLING {
     -I ${deduped_bam} \
     -O ${vcf} \
     --sample-name ${id} \
-    -nct ${task.cpus} \
     -ERC GVCF
     """
 }
