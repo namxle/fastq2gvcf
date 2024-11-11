@@ -11,6 +11,8 @@ process PREPROCESS {
 
     script:
     def sample_name = meta.name
+    def fasta       = "."
+    def fasta_raw   = "."
 
     fastq_R1 = "${sample_name}_R1.fastq.gz"
     fastq_R2 = "${sample_name}_R2.fastq.gz"
