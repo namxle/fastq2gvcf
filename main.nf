@@ -42,14 +42,15 @@ def valid_params = [
 
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
+def fasta_dir = "${projectDir}/assets/fasta"
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     CONFIG FILES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 checkPathParamList = [
-   params.fastq,
-   params.fasta
+   params.fastq
 ]
 
 for (param in checkPathParamList) { 
@@ -62,8 +63,8 @@ for (param in checkPathParamList) {
     } 
 }
 
-ch_fasta = Channel.fromPath(params.fasta)
 ch_fastq = Channel.fromPath(params.fastq)
+ch_fasta = Channel.fromPath("${fasta_dir}/*", type: 'any', hidden: true)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,13 +112,12 @@ workflow {
     ch_input = create_input_channel(ch_fastq)
 
     PREPROCESS(
-        ch_input,
-        ch_fasta
+        ch_input
     )
 
     ALIGNMENT_SORTING(
         PREPROCESS.out.fastq,
-        PREPROCESS.out.fasta
+        ch_fasta.collect()
     )
 }
 
@@ -127,6 +127,7 @@ def create_input_channel (ch_fastq) {
     def meta = [:]
     meta.id                 = params.sample_id
     meta.name               = params.sample_name
+    meta.fasta              = "ref.fa"
 
     return Channel.of([meta]).combine(ch_fastq)
 }
