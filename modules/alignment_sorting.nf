@@ -8,13 +8,13 @@ process ALIGNMENT_SORTING {
     path(fasta_data)
 
     output:
-    tuple val(meta), path(sorted_bam)
+    tuple val(meta), path(sorted_bam), emit: bam
 
     script:
     def sample_name = meta.name
     def bwa_bam     = "bwa.bam"
     def ali_bam     = "ali.bam"
-    def fasta       = "ref.fa"
+    def fasta       = meta.fasta
 
     sorted_bam      = "sorted.bam"
 

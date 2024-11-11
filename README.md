@@ -3,6 +3,7 @@
 ### Run
 
 ```bash
+rm -rf /data/GL/nextflow/namxle/results && \
 nextflow run main.nf \
 -profile docker \
 --fastq /data/GL/nextflow/namxle/samples/SRR2098616.fastq.gz \

@@ -67,6 +67,7 @@ ch_fasta = Channel.fromPath("${fasta_dir}/*", type: 'any', hidden: true)
 
 include { PREPROCESS        } from './modules/preprocess'
 include { ALIGNMENT_SORTING } from './modules/alignment_sorting'
+include { VARIANT_CALLING   } from './modules/variant_calling'
 
 
 //
@@ -109,6 +110,11 @@ workflow {
 
     ALIGNMENT_SORTING(
         PREPROCESS.out.fastq,
+        ch_fasta.collect()
+    )
+
+    VARIANT_CALLING(
+        ALIGNMENT_SORTING.out.bam,
         ch_fasta.collect()
     )
 }
