@@ -19,14 +19,6 @@ Workflow.initialise(workflow, params, log)
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NAMED WORKFLOW FOR PIPELINE
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { ANALYZE } from './workflows/analyze'
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN ALL WORKFLOWS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
@@ -73,8 +65,8 @@ ch_fasta = Channel.fromPath("${fasta_dir}/*", type: 'any', hidden: true)
 */
 
 
-include { PREPROCESS        } from 'modules/preprocess'
-include { ALIGNMENT_SORTING } from 'modules/alignment_sorting'
+include { PREPROCESS        } from './modules/preprocess'
+include { ALIGNMENT_SORTING } from './modules/alignment_sorting'
 
 
 //
