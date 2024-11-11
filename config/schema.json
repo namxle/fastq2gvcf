@@ -12,21 +12,12 @@
       "description": "Define where the pipeline should find vcf sample and save output data.",
       "required": [
         "fastq",
-        "fasta",
         "sample_id",
         "sample_name",
         "outdir",
         "docker_registry"
       ],
       "properties": {
-        "fasta": {
-          "type": "string",
-          "mimetype": "",
-          "pattern": "",
-          "description": "Fasta",
-          "help_text": "",
-          "fa_icon": "fas"
-        },
         "fastq": {
           "type": "string",
           "mimetype": "",
