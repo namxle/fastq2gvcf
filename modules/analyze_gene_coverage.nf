@@ -17,6 +17,6 @@ process ANALYZE_GENE_COVERAGE {
     genes_coverage  = "${id}.coverage.txt"
 
     """
-    bedtools coverage -abam ${deduped_bam} -b ${genes_bed} > ${genes_coverage}
+    bedtools coverage -a ${genes_bed} -b ${deduped_bam} > ${genes_coverage}
     """
 }
