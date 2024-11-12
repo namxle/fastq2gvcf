@@ -1,6 +1,6 @@
 process PREPROCESS_FASTQ {
     tag "$meta.id"
-    label 'process_fixed_medium_cpu'
+    label 'process_medium'
     label 'publish_outdir'
 
     input:

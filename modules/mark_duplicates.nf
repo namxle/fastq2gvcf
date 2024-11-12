@@ -1,6 +1,6 @@
 process MARK_DUPLICATES {
     tag "$meta.id"
-    label 'process_fixed_medium_cpu'
+    label 'process_dual'
     label 'publish_outdir'
 
     input:
