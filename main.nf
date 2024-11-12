@@ -35,6 +35,7 @@ def valid_params = [
 def summary_params = NfcoreSchema.paramsSummaryMap(workflow, params)
 
 def fasta_dir = "${projectDir}/assets/fasta"
+def genes_bed = "${projectDir}/assets/genes.bed"
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -42,7 +43,8 @@ def fasta_dir = "${projectDir}/assets/fasta"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 checkPathParamList = [
-   params.fastq
+   params.fastq,
+   genes_bed
 ]
 
 for (param in checkPathParamList) { 
@@ -58,6 +60,8 @@ for (param in checkPathParamList) {
 ch_fastq = Channel.fromPath(params.fastq)
 ch_fasta = Channel.fromPath("${fasta_dir}/*", type: 'any', hidden: true)
 
+ch_genes_bed = Channel.fromPath(genes_bed)
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT LOCAL MODULES/SUBWORKFLOWS
@@ -65,9 +69,12 @@ ch_fasta = Channel.fromPath("${fasta_dir}/*", type: 'any', hidden: true)
 */
 
 
-include { PREPROCESS        } from './modules/preprocess'
-include { ALIGNMENT_SORTING } from './modules/alignment_sorting'
-include { VARIANT_CALLING   } from './modules/variant_calling'
+include { PREPROCESS_FASTQ      } from './modules/preprocess_fastq'
+include { ALIGNMENT_SORTING     } from './modules/alignment_sorting'
+include { MARK_DUPLICATES       } from './modules/mark_duplicates'
+include { ANALYZE_GENE_COVERAGE } from './modules/analyze_gene_coverage'
+
+// include { VARIANT_CALLING   } from './modules/variant_calling'
 
 
 //
@@ -104,7 +111,7 @@ include { VARIANT_CALLING   } from './modules/variant_calling'
 workflow {
     ch_input = create_input_channel(ch_fastq)
 
-    PREPROCESS(
+    PREPROCESS_FASTQ(
         ch_input
     )
 
@@ -113,9 +120,19 @@ workflow {
         ch_fasta.collect()
     )
 
-    VARIANT_CALLING(
+    // VARIANT_CALLING(
+    //     ALIGNMENT_SORTING.out.bam,
+    //     ch_fasta.collect()
+    // )
+
+    MARK_DUPLICATES(
         ALIGNMENT_SORTING.out.bam,
         ch_fasta.collect()
+    )
+
+    ANALYZE_GENE_COVERAGE(
+        MARK_DUPLICATES.out.deduped_bam,
+        ch_genes_bed
     )
 }
 

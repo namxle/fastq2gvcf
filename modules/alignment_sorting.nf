@@ -23,7 +23,7 @@ process ALIGNMENT_SORTING {
     sorted_bam_bai  = "${sorted_bam}.bai"
 
     """
-    # Align
+    # Alignment
     bwa mem \
     -t ${task.cpus} \
     -M \
