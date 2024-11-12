@@ -116,7 +116,7 @@ workflow {
     )
 
     ALIGNMENT_SORTING(
-        PREPROCESS.out.fastq,
+        PREPROCESS_FASTQ.out.fastq,
         ch_fasta.collect()
     )
 
