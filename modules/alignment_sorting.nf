@@ -1,6 +1,6 @@
 process ALIGNMENT_SORTING {
     tag "$meta.id"
-    label 'process_fixed_medium_cpu'
+    label 'process_medium'
     label 'publish_outdir'
 
     input:
