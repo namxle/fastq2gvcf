@@ -2,8 +2,8 @@
 
 ### Prequisite
 
-1. Install `nextflow` (https://www.nextflow.io/docs/latest/install.html).
-2. Install `docker`.
+1. Install [nextflow](https://www.nextflow.io/docs/latest/install.html).
+2. Install [docker](https://docs.docker.com/engine/install).
 3. Build docker images:
 
 ```bash
@@ -12,7 +12,7 @@ docker build -t namxle/gatk:4.6.1.0 -f docker/gatk.docker .
 docker build -t namxle/ubuntu-tools:22.04-1.9 -f docker/ubuntu-tools.docker .
 ```
 
-4. Download `SRR2098616.fastq.gz` to `examples` folder. From here(https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR2098616&display=download)
+4. Download `SRR2098616.fastq.gz` to `examples` folder. From [here](https://trace.ncbi.nlm.nih.gov/Traces/?view=run_browser&acc=SRR2098616&display=download).
 
 ### Run
 
