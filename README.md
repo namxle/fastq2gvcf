@@ -2,7 +2,7 @@
 
 ### Prequisite
 
-1. Install [nextflow](https://www.nextflow.io/docs/latest/install.html).
+1. Install [nextflow](https://www.nextflow.io/docs/latest/install.html). We prefer version `23.10.0`.
 2. Install [docker](https://docs.docker.com/engine/install).
 3. Build docker images:
 
