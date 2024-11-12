@@ -21,7 +21,7 @@ Run example below:
 ```bash
 rm -rf results && \
 nextflow run main.nf \
--profile docker \
+-profile test \
 --fastq examples/SRR2098616.fastq.gz \
 --sample_id SRR2098616 \
 --sample_name SRR2098616 \
