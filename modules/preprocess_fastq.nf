@@ -20,7 +20,7 @@ process PREPROCESS_FASTQ {
     """
     # Convert to pairs of fastq files
     seqtk seq -1 ${fastq} | bgzip -@ ${task.cpus} > ${fastq_R1}
-    seqtk seq -1 ${fastq} | bgzip -@ ${task.cpus} > ${fastq_R2}
+    seqtk seq -2 ${fastq} | bgzip -@ ${task.cpus} > ${fastq_R2}
 
     # Preprocess fasta file
     # gzip -cd --fast ${fasta} > ${fasta_raw}
